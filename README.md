@@ -1,2 +1,17 @@
-# DIAnet
-The code will be opened soon when the paper is accepted
+# Distribution-aware Interactive Attention Network and Large-scale Cloud Recognition Benchmark on FY-4A Satellite Image
+⭐ This code will be released when the paper is accepted⭐ 
+
+⭐ our [article](https://arxiv.org/abs/2401.03182) ⭐ 
+
+Citation:
+
+```
+@misc{zhang2024multimodal,
+      title={Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification}, 
+      author={Jiaqing Zhang and Jie Lei and Weiying Xie and Geng Yang and Daixun Li and Yunsong Li and Karim Seghouane},
+      year={2024},
+      eprint={2401.03179},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+``` 
