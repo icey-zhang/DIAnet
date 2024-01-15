@@ -1,9 +1,11 @@
 # Distribution-aware Interactive Attention Network and Large-scale Cloud Recognition Benchmark on FY-4A Satellite Image
+
+## Paper
 ⭐ This code will be released when the paper is accepted⭐ 
 
 ⭐ our [article](https://arxiv.org/abs/2401.03182) ⭐ 
 
-Citation:
+## Citation
 
 ```
 @misc{zhang2024multimodal,
@@ -14,4 +16,9 @@ Citation:
       archivePrefix={arXiv},
       primaryClass={cs.CV}
 }
-``` 
+```
+## Products
+<p align="center"> <img src="Products/1.gif" width="90%"> </p><p align="center"> <img src="Products/2.gif" width="90%"> </p><p align="center"> <img src="Products/3.gif" width="90%"> </p>
+
+
+
