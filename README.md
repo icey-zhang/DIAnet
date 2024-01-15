@@ -18,7 +18,7 @@
 }
 ```
 ## Products
-<p align="center"> <img src="Products/1.gif" width="30%"> </p><p align="center"> <img src="Products/2.gif" width="30%"> </p><p align="center"> <img src="Products/3.gif" width="30%"> </p>
+<img src="images\1.gif" weight="40" height="100"><img src="images\2.gif" weight="40" height="100"><img src="images\3.gif" weight="40" height="100">
 
 
 
