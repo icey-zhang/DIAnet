@@ -18,7 +18,8 @@
 }
 ```
 ## Products
-<img src="images\1.gif" weight="40" height="100"><img src="images\2.gif" weight="40" height="100"><img src="images\3.gif" weight="40" height="100">
+
+<p align="center"><img src="images\1.gif" weight="40" height="100"><img src="images\2.gif" weight="40" height="100"><img src="images\3.gif" weight="40" height="100"></p>
 
 
 
