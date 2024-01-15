@@ -19,7 +19,7 @@
 ```
 ## Products
 
-<p align="center"> <img src="Products/1.gif" width="20%"><img src="Products\2.gif" width="20%"><img src="Products\3.gif" width="20%"></p>
+<p align="center"> <img src="Products/1.gif" width="20%">  <img src="Products\2.gif" width="20%">  <img src="Products\3.gif" width="20%"></p>
 
 
 
