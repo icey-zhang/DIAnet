@@ -21,5 +21,26 @@
 
 <p align="center"> <img src="Products/1.gif" width="30%">  <img src="Products\2.gif" width="30%">  <img src="Products\3.gif" width="30%"></p>
 
+## Prepare the dataset
+Download the FY4A L1 dataset for [FY4A](http://satellite.nsmc.org.cn/portalsite/Data/Satellite.aspx)
+Download the Himawari dataset for [Himawari](http://www.jma-net.go.jp/msc/en/)
+
+```python
+├── dataset
+│   ├── Himawari
+......
+│   │   ├── 202005
+│   │   │   ├── 05
+│   │   │   │   ├── 05
+│   │   │   │   │   ├──NC_H08_20200505_0500_L2CLP010_FLDK.02401_02401.nc
+│   │   │   │   │   ├──NC_H08_20200505_0510_L2CLP010_FLDK.02401_02401.nc
+│   │   │   │   │   ├──NC_H08_20200505_0520_L2CLP010_FLDK.02401_02401.nc
+......
+
+│   ├── FY4A 
+│   │   ├── FY4A-_AGRI--_N_REGC_1047E_L1-_FDI-_MULT_NOM_20200104003000_20200104003417_4000M_V0001.HDF
+│   │   ├── FY4A-_AGRI--_N_REGC_1047E_L1-_FDI-_MULT_NOM_20200104003418_20200104003835_4000M_V0001.HDF
+```
+
 
 
