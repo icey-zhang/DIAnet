@@ -44,5 +44,11 @@ Download the Himawari dataset for [Himawari](http://www.jma-net.go.jp/msc/en/)
 ......
 ```
 
+## Split the dataset
+
+```python
+python split.py
+```
+
 
 
