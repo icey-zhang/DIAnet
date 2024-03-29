@@ -34,47 +34,11 @@ def fill_ndarray(t1):             # 定义一个函数，把数组中为零的�
             temp_col[np.isnan(temp_col)] = temp_not_nan_col.mean()    # 用其余元素的均值填充nan所在位置
     return t1
 
-# def correct(fy,label):
-#     channel = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
-#     channeldata = np.zeros((900,1000,14))
-#     fy_4 = np.zeros((900,1000,14))
-#     s=0
-#     fy4a_agri_l1 = FY4A_AGRI_L1(fy)
-#     for i in channel:
-#         keyword = "Channel" + i
-#         geo_range = '5, 50, 85, 135, 0.05'
-#         fy4a_agri_l1.extract(keyword, geo_range)
-#         ttt = fy4a_agri_l1.channels[keyword][0:900,0:1000]
-#         ttt = fill_ndarray(ttt)
-#         channeldata[:,:,s] = ttt
-#         s=s+1
-#     a = channeldata[:,:,0:6]
-#     a_nomal = (a-a.min())/(a.max()-a.min())
-#     b = channeldata[:,:,6:14]
-#     b_nomal = (b-b.min())/(b.max()-b.min())
-
-#     fy_4[:,:,0:6] = a_nomal
-#     fy_4[:,:,6:14] = b_nomal
-#     #fy_4_ = fy_4[0:1000,200:1400,:]
-#     label = (label[200:1100,100:1100])
-#     label = np.uint8(label)
-#     return label,fy_4
 def changecolor(img):
     row,col = img.shape
     I=np.zeros((row,col),dtype=np.uint8)
     new_img = cv.cvtColor(I,cv.COLOR_GRAY2RGB)
     # 此处替换颜色，为BGR通道
-    # new_img[img == 0] = (0, 0, 0) #clear白色
-    # new_img[img == 1] = (128, 0, 0)
-    # new_img[img == 2] = (0, 128, 0)
-    # new_img[img == 3] = (128, 128, 0)
-    # new_img[img == 4] = (0, 0, 128)
-    # new_img[img == 5] = (128,0,128)
-    # new_img[img == 6] = (0,128,128)
-    # new_img[img == 7] = (128,128,128)
-    # new_img[img == 8] = (64, 0, 0)
-    # new_img[img == 9] = (192, 0, 0)
-    # new_img[img == 10] = (255, 255, 255)
     new_img[img == 1] = (204, 204, 255)
     new_img[img == 2] = (102, 102, 255)
     new_img[img == 3] = (0, 0, 255)
@@ -229,9 +193,9 @@ def randompick(year,month_start,month,mat_path,output_path):
         posset_train = l[0:posnm]
         posnm_ = 500 #500张图片一个训练
         posset_val = l[posnm:posnm+posnm_]
-        output_path_txt_train = 'F:/竞赛云检/fysplit/v20/randompick/train.txt'
+        output_path_txt_train = './fysplit/v20/randompick/train.txt'
         creat_txtfile(output_path_txt_train, posset_train)
-        output_path_txt_test = 'F:/竞赛云检/fysplit/v20/randompick/test.txt'
+        output_path_txt_test = './fysplit/v20/randompick/test.txt'
         creat_txtfile(output_path_txt_test, posset_val)
         savemat(mat_path,output_path_txt_train,output_path_txt_test,output_path)    
 
@@ -245,12 +209,12 @@ if __name__ == "__main__":
     fy_list = os.listdir(fy_path_)
 
     #大图
-    savepath_fy_jpg = 'E:/fysplit/v20/jpg' 
+    savepath_fy_jpg = './fysplit/v20/jpg' 
     if not os.path.exists(savepath_fy_jpg):
         os.makedirs(savepath_fy_jpg)
     #小图
-    savepath_fy_train = 'E:/fysplit/v20/mattrain' #训练数据集
-    savepath_fy_label_train = 'E:/fysplit/v20/matmasktrain' #训练标签
+    savepath_fy_train = './fysplit/v20/mattrain' #训练数据集
+    savepath_fy_label_train = './fysplit/v20/matmasktrain' #训练标签
     if not os.path.exists(savepath_fy_train):
         os.makedirs(savepath_fy_train)
     if not os.path.exists(savepath_fy_label_train):
@@ -260,6 +224,6 @@ if __name__ == "__main__":
     searchandsave(mode,hi_label_path,listla,fy_path_,size,savepath_fy_train,savepath_fy_label_train,savepath_fy_jpg)
     
     ###########随机划分训练集和验证集########### 2020年
-    # metpath = 'E:/fysplit/v20'
-    # outputpath = 'E:/fysplit/v20/randompick'
+    # metpath = './fysplit/v20'
+    # outputpath = './fysplit/v20/randompick'
     # randompick('2020',1,10,metpath,outputpath)
