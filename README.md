@@ -54,6 +54,10 @@ python split.py
 ```python
 python tools/train.py
 ```
+## Test the production
 
+```python
+python tools/test_production.py
+```
 
 
