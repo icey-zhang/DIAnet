@@ -74,7 +74,7 @@ def correct(fy,label):
     fy_4[:,:,0:6] = a_nomal
     fy_4[:,:,6:14] = b_nomal
     fy_4_ = fy_4[100:1000,300:1300,:]
-    label = (label[200:1100,100:1100])
+    label = (label[201:1101,100:1100])
     label = np.uint8(label)
     return label,fy_4_
 
