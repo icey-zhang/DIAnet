@@ -90,12 +90,10 @@ class Cityscapes(BaseDataset):
                 name = os.path.splitext(label_name)[0]
                 files.append({
                     "img": image_path,
-                    #"label": label_path,
                     "name": name,
                     "weight": 1
                 })
         elif 'val' in self.list_path:
-            #print(self.list_path)
             
             if self.data_mode =='HDF':
                 image_root = self.root_HDF_img #修改 HDF的路径
@@ -109,7 +107,6 @@ class Cityscapes(BaseDataset):
                 name = os.path.splitext(image_names[i])[0]
                 files.append({
                     "img": image_path,
-                    #"label": label_path,
                     "name": name,
                     "weight": 1
                 })
