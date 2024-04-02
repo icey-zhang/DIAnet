@@ -454,11 +454,6 @@ def ensemble_model():
         # #####计时结束#####
         end = time.time()
         print('all model:%d'%(end - start))
-        # ###### 对齐图像 #################
-        temp = np.zeros(shape=[1000,1400,11])
-        temp[0:999,:,:] = ensemble_data[1:1000,:,:]
-        temp[999,:,:] = ensemble_data[0,:,:]
-        ensemble_data = temp
         ################################
         ensemble_result = np.argmax(ensemble_data,axis=2)
         ensemble_path = root_address + '/RESULT/'
