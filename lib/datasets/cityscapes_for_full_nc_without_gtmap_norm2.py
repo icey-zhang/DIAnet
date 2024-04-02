@@ -54,17 +54,13 @@ class Cityscapes(BaseDataset):
         self.multi_scale = multi_scale
         self.flip = flip
         self.root_HDF_img = root_HDF_img
-        
-        #self.img_list = [line.strip().split() for line in open(root+list_path)] #修改
 
         self.files = self.read_files()
         if num_samples:
             self.files = self.files[:num_samples]
 
-        self.label_mapping = {0: 0, 1: 1, 2: 2, 3: 3,4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10}  #修改
-        self.class_weights = torch.FloatTensor([1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000]).cuda() #修改
-        #self.class_weights = torch.FloatTensor([0.1, 2.0000, 0.1, 2.0000,  0.1,  0.1, 2.0000,  2.0000,  0.1,2.0000,  0.1]).cuda() #修改
-        #self.class_weights = torch.FloatTensor([0.1, 2.0000, 0.1, 2.0000,  0.1,  0.1, 2.0000,  2.0000,  0.1,2.0000,  0.1]).cuda() #修改
+        self.label_mapping = {0: 0, 1: 1, 2: 2, 3: 3,4: 4, 5: 5, 6: 6, 7: 7, 8: 8, 9: 9, 10: 10}
+        self.class_weights = torch.FloatTensor([1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000, 1.0000,1.0000]).cuda()
     def read_files(self):
         files = []
         if 'test' in self.list_path:
@@ -79,21 +75,11 @@ class Cityscapes(BaseDataset):
                     "name": name,
                 })
         elif 'train' in self.list_path:
-            #print(self.list_path)
-
-            # if self.data_mode =='HDF':
-            #     image_root = r'/home/viewer/em1013/datasets/fy/fy_imagetest_mini' #修改 HDF的路径
-            #     label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改
-            # elif self.data_mode =='mat':
-            #     image_root = '/home/viewer/em1013/datasets/fy/fy_imagetest_mini_mat' #修改 mat的路径 
-            #     label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改
 
             if self.data_mode =='HDF':
                 image_root = self.root_HDF_img #修改 HDF的路径
-                #label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改 不用
             elif self.data_mode =='mat':
                 image_root = self.root_HDF_img + '_mat' #修改 mat的路径 
-                #label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改 不用
 
             image_names = os.listdir(image_root)
             #label_names = os.listdir(label_root)
@@ -101,12 +87,7 @@ class Cityscapes(BaseDataset):
                 image_path = os.path.join(image_root, image_names[i])
                 image_name_without_jpg = os.path.splitext(image_names[i])[0]
                 label_name = image_name_without_jpg + '.mat' #修改
-                #label_path = os.path.join(label_root, label_name)
                 name = os.path.splitext(label_name)[0]
-                #print(image_path)
-                #print(label_path)
-                #print(name)
-                #print('__________________________')
                 files.append({
                     "img": image_path,
                     #"label": label_path,
@@ -118,24 +99,14 @@ class Cityscapes(BaseDataset):
             
             if self.data_mode =='HDF':
                 image_root = self.root_HDF_img #修改 HDF的路径
-                #label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改
             elif self.data_mode =='mat':
                 image_root = self.root_HDF_img + '_mat'  #修改 mat的路径 
-                #label_root = '/home/amax/mnt1/datasets/fy/testv8/matmasktest' #修改
 
             image_names = os.listdir(image_root)
             #label_names = os.listdir(label_root)
             for i in range(len(image_names)):
                 image_path = os.path.join(image_root, image_names[i])
-                #image_name_without_jpg = os.path.splitext(image_names[i])[0]
-                #label_name = image_name_without_jpg + '.mat' #修改
-                #label_path = os.path.join(label_root, label_name)
                 name = os.path.splitext(image_names[i])[0]
-                #name = os.path.splitext(label_name)[0]
-                #print(image_path)
-                #print(label_path)
-                #print(name)
-                #print('__________________________')
                 files.append({
                     "img": image_path,
                     #"label": label_path,
@@ -164,37 +135,19 @@ class Cityscapes(BaseDataset):
         ######### 读取image-nc文件 ##############################
             ########数据处理#########
         geo_range = '5, 55, 70, 140, 0.05'# 标准 1000*1400 高分辨
-        #geo_range = '10, 50, 80, 130, 0.1'# 以往 800*1000 低分辨 v2数据集一致
-        #geo_range = '5, 55, 70, 140, 0.1'# 目前 800*1000 高分辨 v6 v8 数据集一致
         channel = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14"]
         ## 读取1000*1400的图像，以800*1000范围内的最大值和最小值用作归一化，没有label ##
         
         #########数据读取方式改变：两种读取HDF或者mat格式#####
         if self.data_mode == 'HDF':
-            #########如果时acw的模型，不做特殊归一化处理，不从800*1000中取最大最小值#####
-            if self.model_name[:-2] == 'hrnet_ACW_sub_model':
-                image = correct_GF(image_path,geo_range,channel,1000,1400)       
-            else:
-                image = correct_GF_800_1000(image_path,geo_range,channel,1000,1400)
+            image = correct_GF_800_1000(image_path,geo_range,channel,1000,1400)
         elif self.data_mode == 'mat':
-            if self.model_name[:-2] == 'hrnet_ACW_sub_model':
-                imagemat = sio.loadmat(image_path) #修改
-                image = imagemat['data'] #修改
-            else:
-                #image = correct_GF_800_1000_mat(image_path,channel,1000,1400)
-                image = correct_GF_1000_1400_mat(image_path,channel,1000,1400)
-        #image = correct_GF_800_1000(image_path,geo_range,channel,1000,1400)
-        #image = correct(image_path,geo_range,channel,800,1000)
+            image = correct_GF_1000_1400_mat(image_path,channel,1000,1400)
         if self.model_name != 'nvidia':
-            image = self.input_transform(image)#坑啊，通道翻转
-        ######## 从1000*1400的图上截取800*1000的图 ##########
-        ######## 不从1000*1400的图上截取800*1000的图 ########
-        # image = image[100:900,200:1200,:]
-        ####################################################
+            image = self.input_transform(image)
         
         image = image.transpose((2, 0, 1))
         size = image.shape
-        #########################################################
         return image.copy(), size, name
 
     def multi_scale_inference(self, config, model, image, scales=[1], flip=False):
