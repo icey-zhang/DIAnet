@@ -230,23 +230,6 @@ def main():
         print('non-distributed training')
 
     ######## Attention ########
-    #if config.ATTENTION.ORDER == '0':
-    #    print('Attention Module: None')
-    #elif config.ATTENTION.ORDER == 'H':
-    #    print('Attention Module: HSN')
-    #elif config.ATTENTION.ORDER == 'P':
-    #    print('Attention Module: PSNL')
-    #elif config.ATTENTION.ORDER == 'HP':
-    #    print('Attention Module: HSN+PSNL')
-    #elif config.ATTENTION.ORDER == 'PH':
-    #    print('Attention Module: PSNL+HSN')
-    #elif config.ATTENTION.ORDER == 'H/P':
-    #    print('Attention Module: HSN and PSNL(parallel)')
-    
-    #if config.ATTENTION.HSN_POSITION != '0':
-    #    print('HSN position: %s' % config.ATTENTION.HSN_POSITION)
-    #if config.ATTENTION.PSNL_POSITION != '0':
-    #    print('PSNL position: %s' % config.ATTENTION.PSNL_POSITION)
     if args.Attention_order == '0':
         print('Attention Module: None')
     elif args.Attention_order == 'H':
