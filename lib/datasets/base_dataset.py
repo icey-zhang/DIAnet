@@ -39,9 +39,6 @@ class BaseDataset(data.Dataset):
 
     def input_transform(self, image):
         image = image.astype(np.float32)[:, :, ::-1]
-        image = image #/ 255.0 #修改
-        #image -= self.mean #修改
-        #image /= self.std #修改
         return image
 
     def label_transform(self, label):
