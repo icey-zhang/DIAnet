@@ -74,9 +74,9 @@ LOSS:
   OHEMTHRES: 0.9
   OHEMKEEP: 131072
 TRAIN:
-  IMAGE_SIZE:
-  - 64 #修改
-  - 64 #修改
+  # IMAGE_SIZE:
+  # - 64 #修改
+  # - 64 #修改
   BASE_SIZE: 24
   BATCH_SIZE_PER_GPU: 8 #修改
   SHUFFLE: true
@@ -94,9 +94,9 @@ TRAIN:
   IGNORE_LABEL: 255
   SCALE_FACTOR: 16
 TEST:
-  IMAGE_SIZE:
-  - 64 #修改
-  - 64 #修改
+  # IMAGE_SIZE:
+  # - 64 #修改
+  # - 64 #修改
   BASE_SIZE: 2048
   BATCH_SIZE_PER_GPU: 32 #修改
   FLIP_TEST: false
