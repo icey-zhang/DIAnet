@@ -7,13 +7,11 @@
 ## Citation
 
 ```
-@misc{zhang2024multimodal,
-      title={Multimodal Informative ViT: Information Aggregation and Distribution for Hyperspectral and LiDAR Classification}, 
-      author={Jiaqing Zhang and Jie Lei and Weiying Xie and Geng Yang and Daixun Li and Yunsong Li and Karim Seghouane},
-      year={2024},
-      eprint={2401.03179},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+@article{zhang2024distribution,
+  title={Distribution-aware Interactive Attention Network and Large-scale Cloud Recognition Benchmark on FY-4A Satellite Image},
+  author={Zhang, Jiaqing and Lei, Jie and Xie, Weiying and Jiang, Kai and Cao, Mingxiang and Li, Yunsong},
+  journal={arXiv preprint arXiv:2401.03182},
+  year={2024}
 }
 ```
 ## Products
