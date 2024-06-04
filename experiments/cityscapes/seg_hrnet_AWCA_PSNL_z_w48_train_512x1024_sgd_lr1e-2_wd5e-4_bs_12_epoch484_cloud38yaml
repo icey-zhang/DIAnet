@@ -9,7 +9,7 @@ WORKERS: 4
 PRINT_FREQ: 100
 
 DATASET:
-  DATASET: cityscapes
+  DATASET: cloud38
   ROOT: '/home/amax/code/HRNet-attention/data/'
   TEST_SET: 'list/cityscapes/test.lst'
   TRAIN_SET: 'list/cityscapes/train.lst'
