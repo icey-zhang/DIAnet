@@ -341,7 +341,7 @@ def main():
                 'best_FwIoU': best_FwIoU,
                 'state_dict': model.module.state_dict(),
                 'optimizer': optimizer.state_dict(),
-            }, os.path.join(final_output_dir,'checkpoint.pth'))
+            }, os.path.join(final_output_dir,'/checkpoint.pth'))
             # if FwIoU > best_FwIoU:
             #     best_FwIoU = FwIoU
             #     torch.save(model.module.state_dict(),
