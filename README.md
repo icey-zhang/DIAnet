@@ -18,7 +18,9 @@
 
 <p align="center"> <img src="Products/1.gif" width="30%">  <img src="Products\2.gif" width="30%">  <img src="Products\3.gif" width="30%"></p>
 
-## Prepare the dataset
+## Usage of the code for FYH dataset
+
+### Prepare the dataset 
 Download the FY4A L1 dataset for [FY4A](http://satellite.nsmc.org.cn/portalsite/Data/Satellite.aspx)
 
 Download the Himawari dataset for [Himawari](http://www.jma-net.go.jp/msc/en/)
@@ -44,24 +46,24 @@ Download the Himawari dataset for [Himawari](http://www.jma-net.go.jp/msc/en/)
 ......
 ```
 
-## Split the dataset
+### Split the dataset
 
 ```python
 python split.py
 ```
-## Train the model
+### Train the model
 
 ```python
 python tools/train.py
 ```
-## Test the production
+### Test the production
 
 ```python
 python tools/test_production.py
 ```
-# The generation validation of the Cloud-38 dataset
+## The generation validation of the Cloud-38 dataset
 
-## Prepare the dataset
+### Prepare the dataset
 Download the Cloud detection dataset [cloud-38 dataset](https://github.com/SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
 
 The directory tree of this dataset is as follows:
@@ -86,17 +88,17 @@ The directory tree of this dataset is as follows:
 │   ├── test_patches_38-Cloud.csv
 │   ├── test_sceneids_38-Cloud.csv
 ```
-## Train the model
+### Train the model
 
 ```python
 python tools/train_cloud38.py
 ```
-## Test the model
+### Test the model
 
 ```python
 python tools/test_cloud38.py
 ```
-## Evaluate the result
+### Evaluate the result
 
 ```python
 python evaluate.py
