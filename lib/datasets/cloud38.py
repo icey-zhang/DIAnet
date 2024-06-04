@@ -1,5 +1,3 @@
-Version:0.9 StartHTML:0000000105 EndHTML:0000104774 StartFragment:0000000141 EndFragment:0000104738
-
 
 import os
 
