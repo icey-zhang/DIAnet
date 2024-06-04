@@ -43,7 +43,7 @@ def parse_args():
     
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        default='experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_512x1024_sgd_lr1e-2_wd5e-4_bs_12_epoch484.yaml', #修改
+                        default='experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_512x1024_sgd_lr1e-2_wd5e-4_bs_12_epoch484_cloud38.yaml', #修改
                         #required=True,
                         type=str)
     parser.add_argument('--seed', type=int, default=304)
