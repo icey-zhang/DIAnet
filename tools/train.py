@@ -325,7 +325,7 @@ def main():
               epoch_iters, config.TRAIN.LR, num_iters,
               trainloader, optimizer, model, writer_dict)
         print('3')
-        print('\ntraining HRNet\n')
+        print('\ntraining DIANet\n')
         print (time.strftime('%H:%M:%S',time.localtime(time.time())))
         
         valid_loss, mean_IoU, IoU_array, FwIoU = validate_patch(config, 
