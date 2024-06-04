@@ -59,32 +59,32 @@ python tools/train.py
 ```python
 python tools/test_production.py
 ```
-# The generation validation of the cloud-38 dataset
+# The generation validation of the Cloud-38 dataset
 
 ## Prepare the dataset
 Download the Cloud detection dataset [cloud-38 dataset](https://github.com/SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
 
 The directory tree of this dataset is as follows:
 ```python
-├──38-Cloud_training
-│   ├──train_red
-│   ├──train_green
-│   ├──train_blue
-│   ├──train_nir
-│   ├──train_gt
-│   ├──Natural_False_Color
-│   ├──Entire_scene_gts
-│   ├──training_patches_38-Cloud.csv
-│   ├──training_sceneids_38-Cloud.csv
-├──38-Cloud_test
-│   ├──test_red
-│   ├──test_green
-│   ├──test_blue
-│   ├──test_nir
-│   ├──Natural_False_Color
-│   ├──Entire_scene_gts
-│   ├──test_patches_38-Cloud.csv
-│   ├──test_sceneids_38-Cloud.csv
+├── 38-Cloud_training
+│   ├── train_red
+│   ├── train_green
+│   ├── train_blue
+│   ├── train_nir
+│   ├── train_gt
+│   ├── Natural_False_Color
+│   ├── Entire_scene_gts
+│   ├── training_patches_38-Cloud.csv
+│   ├── training_sceneids_38-Cloud.csv
+├── 38-Cloud_test
+│   ├── test_red
+│   ├── test_green
+│   ├── test_blue
+│   ├── test_nir
+│   ├── Natural_False_Color
+│   ├── Entire_scene_gts
+│   ├── test_patches_38-Cloud.csv
+│   ├── test_sceneids_38-Cloud.csv
 ```
 ## Train the model
 
