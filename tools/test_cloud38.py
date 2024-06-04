@@ -171,7 +171,7 @@ def main():
 
 
     test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])
-    test_dataset = datasets.cityscapes(
+    test_dataset = eval('datasets.'+config.DATASET.DATASET)(
                         root=config.DATASET.ROOT,
                         list_path=config.DATASET.TEST_SET,
                         num_samples=config.TEST.NUM_SAMPLES,
