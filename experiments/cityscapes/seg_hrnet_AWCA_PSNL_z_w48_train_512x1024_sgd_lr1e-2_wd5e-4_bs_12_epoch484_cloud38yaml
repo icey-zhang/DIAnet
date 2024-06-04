@@ -77,8 +77,8 @@ TRAIN:
   IMAGE_SIZE:
   - 100 #修改
   - 100 #修改
-  BASE_SIZE: 1
-  BATCH_SIZE_PER_GPU: 1 #修改
+  BASE_SIZE: 4
+  BATCH_SIZE_PER_GPU: 4 #修改
   SHUFFLE: true
   BEGIN_EPOCH: 0
   END_EPOCH: 100 #修改
