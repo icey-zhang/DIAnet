@@ -328,66 +328,30 @@ def main():
         for idx, batch in enumerate(testloader):
             image, size, name = batch
             image = image.cuda()
-            
-            # for i in range(image.shape[0]):
-            #     image = np.asarray(image[i].cpu(), dtype=np.uint8)*255
-            #     # pred = self.convert_label(preds[i], inverse=True)
-            #     save_img = Image.fromarray(image[0:3,:,:].transpose(1,2,0))
-            #     # save_img.putpalette(palette)
-            #     save_img.save(os.path.join('original', ''.join(name)+'.png'))
-            # label = label.long().cuda()
+
+            ################ test the model size ################
+            # import thop
+            # flops, params = thop.profile(model.module, inputs=(image,), verbose=True)
+            # print('Params: %.4fM'%(params/1e6))
+            # print('FLOPs: %.2fG'%(flops/1e9))
+            ####################################################
 
             preds = model(image)
             preds = np.asarray(np.argmax(preds.cpu(), axis=1)*255, dtype=np.uint8)
-            # print(pred)
             for i in range(preds.shape[0]):
                 # pred = self.convert_label(preds[i], inverse=True)
                 save_img = Image.fromarray(preds[i])
                 # save_img.putpalette(palette)
                 save_img.save(os.path.join('result_384', ''.join(name).replace('red_','')+'.TIF'))
                 
-
-    # valid_loss, mean_IoU, IoU_array = validate(config, 
-    #             testloader, model, writer_dict)
-    """"""
-    # train(config, epoch, config.TRAIN.END_EPOCH, 
-    #       epoch_iters, config.TRAIN.LR, num_iters,
-    #       trainloader, optimizer, model, writer_dict)
     print('3')
-    # print('\ntraining HRNet\n')
     print (time.strftime('%H:%M:%S',time.localtime(time.time())))
     
-    # valid_loss, mean_IoU, IoU_array, FwIoU = validate_patch(config, 
-    #             testloader, model, writer_dict)
-    # print('4')
+
     
-    # if args.local_rank <= 0:
-    #     logger.info('=> saving checkpoint to {}'.format(
-    #         final_output_dir + 'checkpoint.pth'))
-    #     torch.save({
-    #         'epoch': epoch+1,
-    #         'best_FwIoU': best_FwIoU,
-    #         'state_dict': model.module.state_dict(),
-    #         'optimizer': optimizer.state_dict(),
-    #     }, os.path.join(final_output_dir,'checkpoint.pth'))
-    #     # if FwIoU > best_FwIoU:
-    #     #     best_FwIoU = FwIoU
-    #     #     torch.save(model.module.state_dict(),
-    #     #             os.path.join(final_output_dir, 'best.pth'))
-    #     # msg = 'Loss: {:.3f}, MeanIU: {: 4.4f}, FwIoU: {: 4.4f}, best_FwIoU: {: 4.4f}'.format(
-    #     #             valid_loss, mean_IoU, FwIoU, best_FwIoU)
-    #     # logging.info(msg)
-    #     # logging.info(IoU_array)
 
-    # if args.local_rank <= 0:
 
-    #     torch.save(model.module.state_dict(),
-    #             os.path.join(final_output_dir, 'final_state.pth'))
 
-    #     writer_dict['writer'].close()
-    #     end = timeit.default_timer()
-    #     logger.info('Hours: %d' % np.int_((end-start)/3600))
-    #     logger.info('Done')
 
 
 if __name__ == '__main__':
