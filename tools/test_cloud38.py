@@ -249,10 +249,7 @@ def main():
                     .format(checkpoint['epoch']))
     if distributed:
         torch.distributed.barrier()
-
-
-    print('1')
-
+        
     model.eval()
     with torch.no_grad():
         # metrics = StreamSegMetrics(config.DATASET.NUM_CLASSES)
