@@ -101,5 +101,5 @@ python tools/test_cloud38.py
 ### Evaluate the result
 
 ```python
-python evaluate.py
+python tools/evaluate.py
 ```
