@@ -74,14 +74,14 @@ LOSS:
   OHEMTHRES: 0.9
   OHEMKEEP: 131072
 TRAIN:
-  IMAGE_SIZE:
-  - 100 #修改
-  - 100 #修改
+  # IMAGE_SIZE:
+  # - 100
+  # - 100
   BASE_SIZE: 4
-  BATCH_SIZE_PER_GPU: 4 #修改
+  BATCH_SIZE_PER_GPU: 4
   SHUFFLE: true
   BEGIN_EPOCH: 0
-  END_EPOCH: 100 #修改
+  END_EPOCH: 1000
   RESUME: true
   OPTIMIZER: sgd
   LR: 0.01
@@ -94,11 +94,11 @@ TRAIN:
   IGNORE_LABEL: 255
   SCALE_FACTOR: 16
 TEST:
-  IMAGE_SIZE:
-  - 100 #修改
-  - 100 #修改
+  # IMAGE_SIZE:
+  # - 100
+  # - 100
   BASE_SIZE: 1
-  BATCH_SIZE_PER_GPU: 1 #修改
+  BATCH_SIZE_PER_GPU: 1
   FLIP_TEST: false
   MULTI_SCALE: false
   MODEL_FILE: '/tools/output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_512x1024_sgd_lr1e-2_wd5e-4_bs_12_epoch484/best.pth'
