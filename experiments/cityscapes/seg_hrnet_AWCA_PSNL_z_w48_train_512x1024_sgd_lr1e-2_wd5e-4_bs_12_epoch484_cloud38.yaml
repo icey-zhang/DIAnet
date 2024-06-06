@@ -77,14 +77,14 @@ TRAIN:
   # IMAGE_SIZE:
   # - 192
   # - 192
-  BASE_SIZE: 4
+  BASE_SIZE: 1024
   BATCH_SIZE_PER_GPU: 4
   SHUFFLE: true
   BEGIN_EPOCH: 0
   END_EPOCH: 1000
   RESUME: true
   OPTIMIZER: sgd
-  LR: 0.01
+  LR: 0.0001
   WD: 0.0005
   MOMENTUM: 0.9
   NESTEROV: false
@@ -97,7 +97,7 @@ TEST:
   # IMAGE_SIZE:
   # - 192
   # - 192
-  BASE_SIZE: 1
+  BASE_SIZE: 1024
   BATCH_SIZE_PER_GPU: 1
   FLIP_TEST: false
   MULTI_SCALE: false
