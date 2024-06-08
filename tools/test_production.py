@@ -120,7 +120,7 @@ def parse_args_for_HR_AWCA_PSNL(model_name):
     
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        default=os.path.join(root_address, 'experiments/cityscapes/seg_'+model_name+'_w48_train_512x1024_sgd_lr1e-2_wd5e-4_bs_12_epoch484.yaml'),
+                        default=os.path.join(root_address, 'experiments/cityscapes/seg_'+model_name+'_w48_train_100x100_sgd_lr1e-2_wd5e-4_bs_8_epoch100.yaml'),
                         type=str)
     parser.add_argument('--seed', type=int, default=304)
     parser.add_argument("--local_rank", type=int, default=-1)       
