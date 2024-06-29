@@ -72,12 +72,12 @@ class StreamSegMetrics(_StreamMetrics):
         iu = np.diag(hist) / (hist.sum(axis=1) + hist.sum(axis=0) - np.diag(hist))
         mean_iu = np.nanmean(iu)
         freq = hist.sum(axis=1) / hist.sum()
-        freq[0]=0
-        freq[2]=0
-        freq[4]=0
-        freq[5]=0
-        freq[8]=0
-        freq[10]=0
+        # freq[0]=0
+        # freq[2]=0
+        # freq[4]=0
+        # freq[5]=0
+        # freq[8]=0
+        # freq[10]=0
         freq = freq/freq.sum()
         fwavacc = (freq[freq > 0] * iu[freq > 0]).sum()
         #cls_iu = dict(zip(range(self.n_classes), iu))
