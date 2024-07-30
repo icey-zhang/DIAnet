@@ -85,49 +85,6 @@ def get_sampler(dataset):
         return None
 
 
-def binary_iou(y_true, y_pred, epsilon=1e-6):
-    # 计算交集
-    intersection = (y_true & y_pred).sum()
-
-    # 计算并集
-    union = (y_true | y_pred).sum()
-
-    # 计算IoU，使用epsilon避免除以零
-    iou = intersection / (union + epsilon)
-
-    # 确保IoU值在[0, 1]范围内
-    iou = torch.clamp(iou, min=0, max=1)
-    
-    return iou.item()  # 返回IoU的值
-
-def QE_calcul(predict, gt, labels, conf_print):
-    y_true = gt.flatten()
-    y_pred = predict.flatten()
-    cm = confusion_matrix(y_true, y_pred, labels=labels)
-    if conf_print:
-        print(cm)
-
-    precision = precision_score(y_true, y_pred, labels=labels, average=None)
-    recall = recall_score(y_true, y_pred, labels=labels, average=None)
-    accuracy = accuracy_score(y_true, y_pred)
-    jaccard = jaccard_score(y_true, y_pred, labels=labels, average=None)
-
-    specificity = []
-    for i in range(len(labels)):
-        tn = cm.sum() - (cm[i, :].sum() + cm[:, i].sum() - cm[i, i])
-        fp = cm[:, i].sum() - cm[i, i]
-        specificity.append(tn / (tn + fp))
-
-    metrics = {
-        'precision': precision,
-        'recall': recall,
-        'specificity': specificity,
-        'jaccard': jaccard,
-        'accuracy': accuracy
-    }
-    
-    return metrics
-
 def main():
     args = parse_args()
 
@@ -166,11 +123,6 @@ def main():
     model = eval('models.'+config.MODEL.NAME +
                  '.get_seg_model')(config)
 
-    # dump_input = torch.rand(
-    #     (1, 3, config.TRAIN.IMAGE_SIZE[1], config.TRAIN.IMAGE_SIZE[0])
-    # )
-    # logger.info(get_model_summary(model.cuda(), dump_input.cuda()))
-
     # copy model file
     if distributed and args.local_rank == 0:
         this_dir = os.path.dirname(__file__)
@@ -179,42 +131,6 @@ def main():
             shutil.rmtree(models_dst_dir)
         shutil.copytree(os.path.join(this_dir, '../lib/models'), models_dst_dir)
 
-    # if distributed:
-    #     batch_size = config.TRAIN.BATCH_SIZE_PER_GPU
-    # else:
-    #     batch_size = config.TRAIN.BATCH_SIZE_PER_GPU * len(gpus)
-
-    # prepare data
-    # crop_size = (config.TRAIN.IMAGE_SIZE[1], config.TRAIN.IMAGE_SIZE[0])
-    # train_dataset = eval('datasets.'+config.DATASET.DATASET+'_for_test')(
-    #                     root=config.DATASET.ROOT,
-    #                     list_path=config.DATASET.TRAIN_SET,
-    #                     num_samples=None,
-    #                     num_classes=config.DATASET.NUM_CLASSES,
-    #                     multi_scale=config.TRAIN.MULTI_SCALE,
-    #                     flip=config.TRAIN.FLIP,
-    #                     ignore_label=config.TRAIN.IGNORE_LABEL,
-    #                     base_size=config.TRAIN.BASE_SIZE,
-    #                     crop_size=crop_size,
-    #                     downsample_rate=config.TRAIN.DOWNSAMPLERATE,
-    #                     scale_factor=config.TRAIN.SCALE_FACTOR,
-    #                     )
-
-    # print('train_dataset load name and path')
-
-    # train_sampler = get_sampler(train_dataset)
-    # print(train_sampler)
-    # trainloader = torch.utils.data.DataLoader(
-    #     train_dataset,
-    #     batch_size=batch_size,
-    #     shuffle=config.TRAIN.SHUFFLE and train_sampler is None,
-    #     num_workers=config.WORKERS,
-    #     pin_memory=True,
-    #     drop_last=True,
-    #     sampler=train_sampler)
-    
-
-    # print('train_dataset load success')
 
 
     test_size = (config.TEST.IMAGE_SIZE[1], config.TEST.IMAGE_SIZE[0])
@@ -276,66 +192,8 @@ def main():
     else:
         model = nn.DataParallel(model, device_ids=gpus).cuda()
         print('non-distributed training')
-
-    ######## Attention ########
-    if args.Attention_order == '0':
-        print('Attention Module: None')
-    elif args.Attention_order == 'H':
-        print('Attention Module: HSN')
-    elif args.Attention_order == 'P':
-        print('Attention Module: PSNL')
-    elif args.Attention_order == 'HP':
-        print('Attention Module: HSN+PSNL')
-    elif args.Attention_order == 'PH':
-        print('Attention Module: PSNL+HSN')
-    elif args.Attention_order == 'H/P':
-        print('Attention Module: HSN and PSNL(parallel)')
-
-    if args.HSN_position != '0':
-        print('HSN position: %s' % args.HSN_position)
-    if args.PSNL_position != '0':
-        print('PSNL position: %s' % args.PSNL_position)
-    ######## Attention ########
     
 
-    # optimizer
-    # if config.TRAIN.OPTIMIZER == 'sgd':
-
-    #     params_dict = dict(model.named_parameters())
-    #     if config.TRAIN.NONBACKBONE_KEYWORDS:
-    #         bb_lr = []
-    #         nbb_lr = []
-    #         nbb_keys = set()
-    #         for k, param in params_dict.items():
-    #             if any(part in k for part in config.TRAIN.NONBACKBONE_KEYWORDS):
-    #                 nbb_lr.append(param)
-    #                 nbb_keys.add(k)
-    #             else:
-    #                 bb_lr.append(param)
-    #         print(nbb_keys)
-    #         params = [{'params': bb_lr, 'lr': config.TRAIN.LR}, {'params': nbb_lr, 'lr': config.TRAIN.LR * config.TRAIN.NONBACKBONE_MULT}]
-    #     else:
-    #         params = [{'params': list(params_dict.values()), 'lr': config.TRAIN.LR}]
-
-    #     # optimizer = torch.optim.SGD(params,
-    #     #                         lr=config.TRAIN.LR,
-    #     #                         momentum=config.TRAIN.MOMENTUM,
-    #     #                         weight_decay=config.TRAIN.WD,
-    #     #                         nesterov=config.TRAIN.NESTEROV,
-    #     #                         )
-    # else:
-    #     raise ValueError('Only Support SGD optimizer')
-
-    # epoch_iters = np.int_(test_dataset.__len__() / 
-    #                     config.TRAIN.BATCH_SIZE_PER_GPU / len(gpus))
-        
-    # best_mIoU = 0
-    # best_FwIoU = 0.0
-    # FwIoU = 0.0
-    # last_epoch = 0
-    #### continue ####
-
-    #### continue ####
     model_state_file = os.path.join('./output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-2_wd5e-4_bs_6_epoch100_sparcs/best_iou.pth') #修改路径继续训练
     if os.path.isfile(model_state_file):
         checkpoint = torch.load(model_state_file, map_location='cuda:0')
@@ -343,41 +201,18 @@ def main():
             best_FwIoU = checkpoint['best_FwIoU']
         except:
             print("checkpoint未记录best_FwIoU")
-        # last_epoch = checkpoint['epoch']
-        # dct = checkpoint['state_dict']
         
         # model.module.load_state_dict({k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
         model.module.load_state_dict({k.replace('model.', ''): v for k, v in checkpoint.items() if k.startswith('model.')})
         
-        # optimizer.load_state_dict(checkpoint['optimizer'])
-        # logger.info("=> loaded checkpoint (epoch {})"
-        #             .format(checkpoint['epoch']))
     if distributed:
         torch.distributed.barrier()
 
-    # start = timeit.default_timer()
-    # end_epoch = config.TRAIN.END_EPOCH
-    # num_iters = config.TRAIN.END_EPOCH * epoch_iters
-    
-    # for epoch in range(last_epoch, end_epoch):
     print('1')
 
-    # current_trainloader = testloader
-    # if current_trainloader.sampler is not None and hasattr(current_trainloader.sampler, 'set_epoch'):
-    #     current_trainloader.sampler.set_epoch(epoch)
-    #     print('2')
     model = model.cuda()
     model.eval()
 
-    # ave_loss = AverageMeter()
-    # nums = config.MODEL.NUM_OUTPUTS
-    # confusion_matrix = np.zeros(
-    #     (config.DATASET.NUM_CLASSES, config.DATASET.NUM_CLASSES, nums))
-    QE = []
-    scene_assess = []
-    classes = [0, 1]
-    conf_matrix_print_out = 0
-    iou = []
     model = FullModel(model, criterion)
     valid_loss, mean_IoU, IoU_array, FwIoU = validate(config, 
             testloader, model, writer_dict)
