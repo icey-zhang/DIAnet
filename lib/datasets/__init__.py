@@ -6,6 +6,7 @@ from __future__ import print_function
 
 from .cityscapes import Cityscapes as cityscapes
 from .cloud38 import Cloud38 as cloud38
+from .SPARCS import SPARCS as sparcs
 
 from .lip import LIP as lip
 from .pascal_ctx import PASCALContext as pascal_ctx
