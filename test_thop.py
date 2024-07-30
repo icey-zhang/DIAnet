@@ -83,7 +83,14 @@ def main():
     flops, params = thop.profile(model, inputs=(image,), verbose=True)
     print('Params: %.4fM'%(params/1e6))
     print('FLOPs: %.2fG'%(flops/1e9))
-
+    t_all = []
+    for i in range(100):
+        t1 = time.time()
+        y = model(image)
+        t2 = time.time()
+        t_all.append(t2 - t1)
+    print('average time:', np.mean(t_all) / 1)
+    print('average fps:',1 / np.mean(t_all))
 
 if __name__ == '__main__':
     main()
