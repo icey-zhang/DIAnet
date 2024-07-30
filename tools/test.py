@@ -336,7 +336,7 @@ def main():
     #### continue ####
 
     #### continue ####
-    model_state_file = os.path.join('./output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_100x100_sgd_lr1e-2_wd5e-4_bs_8_epoch200v1/best_iou.pth') #修改路径继续训练
+    model_state_file = os.path.join('./output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-2_wd5e-4_bs_6_epoch100_sparcs/best_iou.pth') #修改路径继续训练
     if os.path.isfile(model_state_file):
         checkpoint = torch.load(model_state_file, map_location='cuda:0')
         try:
