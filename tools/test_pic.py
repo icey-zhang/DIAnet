@@ -186,27 +186,6 @@ def main():
         model = nn.DataParallel(model, device_ids=gpus).cuda()
         print('non-distributed training')
 
-    ######## Attention ########
-    if args.Attention_order == '0':
-        print('Attention Module: None')
-    elif args.Attention_order == 'H':
-        print('Attention Module: HSN')
-    elif args.Attention_order == 'P':
-        print('Attention Module: PSNL')
-    elif args.Attention_order == 'HP':
-        print('Attention Module: HSN+PSNL')
-    elif args.Attention_order == 'PH':
-        print('Attention Module: PSNL+HSN')
-    elif args.Attention_order == 'H/P':
-        print('Attention Module: HSN and PSNL(parallel)')
-
-    if args.HSN_position != '0':
-        print('HSN position: %s' % args.HSN_position)
-    if args.PSNL_position != '0':
-        print('PSNL position: %s' % args.PSNL_position)
-    ######## Attention ########
-    
-
     # optimizer
     if config.TRAIN.OPTIMIZER == 'sgd':
 
@@ -238,10 +217,9 @@ def main():
             best_FwIoU = checkpoint['best_FwIoU']
         except:
             print("checkpoint未记录best_FwIoU")
-        # last_epoch = checkpoint['epoch']
-        # dct = checkpoint['state_dict']
         
-        model.module.load_state_dict({k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
+        # model.module.load_state_dict({k.replace('model.', ''): v for k, v in checkpoint['state_dict'].items() if k.startswith('model.')})
+        model.module.load_state_dict({k.replace('model.', ''): v for k, v in checkpoint.items() if k.startswith('model.')})
         # optimizer.load_state_dict(checkpoint['optimizer'])
         logger.info("=> loaded checkpoint (epoch {})"
                     .format(checkpoint['epoch']))
