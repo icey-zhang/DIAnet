@@ -83,3 +83,11 @@ python tools/train.py  --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_tr
 python tools/test.py  --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-4_wd5e-4_bs_6_epoch100_sparcs.yaml
 ```
 
+### Gernerate the final result
+```python
+python tools/test_pic.py --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-4_wd5e-4_bs_6_epoch100_sparcs.yaml
+python tools/test_pic_merge.py
+```
+
+
+
