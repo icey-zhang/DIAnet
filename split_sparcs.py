@@ -16,7 +16,7 @@ import os
 #     lastlabel = label[:,:,0].astype(np.uint8)
 #     imsave(savepath + ri.replace("mask","label"),lastlabel)
 
-#step1: 切分数据集3:1,并且裁剪成200,间隔是200，总共一张1000*1000的图像可以裁剪成25张
+#step2: 切分数据集3:1,并且裁剪成200,间隔是200，总共一张1000*1000的图像可以裁剪成25张
 # from PIL import Image
 from skimage import io
 from skimage.util import view_as_windows
