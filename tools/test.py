@@ -1,7 +1,7 @@
 # ------------------------------------------------------------------------------
 # Copyright (c) Microsoft
 # Licensed under the MIT License.
-# Written by Jiaqing Zhang & Kai Jiang
+# Written by Jiaqing Zhang
 # ------------------------------------------------------------------------------
 
 
