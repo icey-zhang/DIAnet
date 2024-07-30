@@ -54,7 +54,7 @@ python split.py
 ### Train the model
 
 ```python
-python tools/train.py
+python tools/train.py --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_100x100_sgd_lr1e-2_wd5e-4_bs_8_epoch100.yaml
 ```
 ### Test the production
 
@@ -66,14 +66,20 @@ python tools/test_production.py
 ### Prepare the dataset
 Download the Cloud detection SPARCS dataset 
 
+### Split the dataset
+
+```python
+python split.py
+```
+
 ### Train the model
 
 ```python
-python tools/train.py
+python tools/train.py  --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-4_wd5e-4_bs_6_epoch100_sparcs.yaml
 ```
 ### Test the model
 
 ```python
-python tools/test.py
+python tools/test.py  --cfg experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-4_wd5e-4_bs_6_epoch100_sparcs.yaml
 ```
 
