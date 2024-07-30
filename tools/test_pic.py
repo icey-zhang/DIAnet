@@ -41,7 +41,7 @@ def parse_args():
     
     parser.add_argument('--cfg',
                         help='experiment configure file name',
-                        default='experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_192x192_sgd_lr1e-4_wd5e-4_bs_4_epoch200_cloud38.yaml', #修改
+                        default='experiments/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-2_wd5e-4_bs_6_epoch100_sparcs.yaml', #修改
                         #required=True,
                         type=str)
     parser.add_argument('--seed', type=int, default=304)
@@ -231,7 +231,7 @@ def main():
 
 
     #### continue ####
-    model_state_file = os.path.join('./output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_512x1024_sgd_lr1e-2_wd5e-4_bs_12_epoch484/checkpoint.pth') #修改路径继续训练
+    model_state_file = os.path.join('./output/cityscapes/seg_hrnet_AWCA_PSNL_z_w48_train_200x200_sgd_lr1e-2_wd5e-4_bs_6_epoch100_sparcs/best_iou.pth') #修改路径继续训练
     if os.path.isfile(model_state_file):
         checkpoint = torch.load(model_state_file, map_location='cuda:0')
         try:
@@ -267,7 +267,7 @@ def main():
             preds = np.asarray(np.argmax(preds.cpu(), axis=1)*255, dtype=np.uint8)
             for i in range(preds.shape[0]):
                 save_img = Image.fromarray(preds[i])
-                save_img.save(os.path.join('result192', ''.join(name).replace('red_','')+'.TIF'))
+                save_img.save(os.path.join('result_dianet', ''.join(name).replace('red_','')+'.TIF'))
            
 
 if __name__ == '__main__':
