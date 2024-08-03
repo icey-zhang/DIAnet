@@ -69,7 +69,7 @@ Download the Cloud detection SPARCS dataset
 ### Split the dataset
 
 ```python
-python split.py
+python split_sparcs.py
 ```
 
 ### Train the model
